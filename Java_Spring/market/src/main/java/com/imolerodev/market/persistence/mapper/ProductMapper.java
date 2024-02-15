@@ -11,12 +11,7 @@ import java.util.List;
 
 // como hay una relación con categoria, se puede agregar un mapper por referencia
 // usando el atributo uses y referenciando a la clase
-@Mapper(
-        componentModel = "spring",
-        uses = {
-                CategoryMapper.class
-        }
-)
+@Mapper(componentModel = "spring", uses = {CategoryMapper.class})
 public interface ProductMapper {
     @Mappings({
             @Mapping(source = "idProducto", target = "productId"),

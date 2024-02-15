@@ -5,6 +5,7 @@ import com.imolerodev.market.domain.repository.ProductRepository;
 import com.imolerodev.market.persistence.crud.ProductoCrudRepository;
 import com.imolerodev.market.persistence.entity.Producto;
 import com.imolerodev.market.persistence.mapper.ProductMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +15,10 @@ import java.util.Optional;
 // tambien puede usarse @Component, solo que esta anotación es muy genérica
 @Repository
 public class ProductoRepository implements ProductRepository {
+    @Autowired
     private ProductoCrudRepository productoCrudRepository;
+
+    @Autowired
     private ProductMapper mapper;
 
     @Override

@@ -6,18 +6,17 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "order_item")
+@IdClass(OrderItemId.class)
 @Getter
 @Setter
 public class OrderItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idItem;
-
     @ManyToOne
     @JoinColumn(name = "id_order", referencedColumnName = "idOrder")
     private OrderEntity order;
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "id_pizza", referencedColumnName = "idPizza")
     private PizzaEntity pizza;

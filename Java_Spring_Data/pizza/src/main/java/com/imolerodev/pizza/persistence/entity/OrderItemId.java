@@ -15,7 +15,7 @@ import java.util.Objects;
 public class OrderItemId implements Serializable {
     private OrderEntity order;
 
-    private PizzaEntity pizza;
+    private Integer idItem;
 
     @Override
     public boolean equals(Object o) {
@@ -24,12 +24,11 @@ public class OrderItemId implements Serializable {
         OrderItemId that = (OrderItemId) o;
         return Objects.equals(
                 order.getIdOrder(), that.order.getIdOrder()) &&
-                Objects.equals(pizza.getIdPizza(), that.pizza.getIdPizza()
-        );
+                Objects.equals(idItem, that.idItem);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(order, pizza);
+        return Objects.hash(order, idItem);
     }
 }

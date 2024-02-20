@@ -20,13 +20,13 @@ public class OrderEntity {
     private LocalDateTime date;
 
     @Column(nullable = false, columnDefinition = "Decimal(6, 2)")
-    private Double price;
+    private Double total;
 
     @Column(nullable = false, columnDefinition = "Char(1)")
     private String method;
 
     @Column(length = 200)
-    private String addionalNotes;
+    private String additionalNotes;
 
     @ManyToOne
     @JoinColumn(name = "id_customer", referencedColumnName = "idCustomer", insertable = false, updatable = false)

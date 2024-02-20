@@ -29,9 +29,9 @@ public class OrderEntity {
     private String addionalNotes;
 
     @ManyToOne
-    @JoinColumn(name = "id_customer", referencedColumnName = "idCustomer")
+    @JoinColumn(name = "id_customer", referencedColumnName = "idCustomer", insertable = false, updatable = false)
     private CustomerEntity customer;
 
     @OneToMany(mappedBy = "order")
-    private List<OrderItem> orderItems;
+    private List<OrderItemEntity> orderItemEntities;
 }

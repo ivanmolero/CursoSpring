@@ -9,16 +9,16 @@ import lombok.Setter;
 @IdClass(OrderItemId.class)
 @Getter
 @Setter
-public class OrderItem {
+public class OrderItemEntity {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "id_order", referencedColumnName = "idOrder")
+    @JoinColumn(name = "id_order", referencedColumnName = "idOrder", insertable = false, updatable = false)
     private OrderEntity order;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "id_pizza", referencedColumnName = "idPizza")
+    @JoinColumn(name = "id_pizza", referencedColumnName = "idPizza", insertable = false, updatable = false)
     private PizzaEntity pizza;
 
     @Column(columnDefinition = "Decimal(2,1)", nullable = false)

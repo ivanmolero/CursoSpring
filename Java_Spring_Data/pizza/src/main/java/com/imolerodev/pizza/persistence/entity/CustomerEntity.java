@@ -26,7 +26,4 @@ public class CustomerEntity {
 
     @Column(length = 20)
     private String phoneNumber;
-
-    @OneToMany(mappedBy = "customer")
-    private List<OrderEntity> orders;
 }

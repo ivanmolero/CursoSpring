@@ -3,8 +3,6 @@ package com.imolerodev.pizza.service;
 import com.imolerodev.pizza.persistence.entity.PizzaEntity;
 import com.imolerodev.pizza.persistence.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +26,14 @@ public class PizzaService {
 
     public PizzaEntity getByName(String name) {
         return pizzaRepository.findAllByAvailableTrueAndAndNameIgnoreCase(name);
+    }
+
+    public List<PizzaEntity> getAllWithIngredient(String ingredient) {
+        return pizzaRepository.findAllByAvailableTrueAndDescriptionContainsIgnoreCase(ingredient);
+    }
+
+    public List<PizzaEntity> getAllWithoutIngredient(String ingredient) {
+        return pizzaRepository.findAllByAvailableTrueAndDescriptionNotContainsIgnoreCase(ingredient);
     }
 
     public PizzaEntity save(PizzaEntity pizza) {

@@ -1,5 +1,6 @@
 package com.imolerodev.pizza.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,7 @@ public class OrderItemEntity {
     @Id
     @ManyToOne
     @JoinColumn(name = "id_order", referencedColumnName = "idOrder", insertable = false, updatable = false)
+    @JsonIgnore
     private OrderEntity order;
 
     @Id
@@ -22,8 +24,6 @@ public class OrderItemEntity {
     @ManyToOne
     @JoinColumn(name = "id_pizza", referencedColumnName = "idPizza", insertable = false, updatable = false)
     private PizzaEntity pizza;
-
-
 
     @Column(columnDefinition = "Decimal(2,1)", nullable = false)
     private Double quantity;

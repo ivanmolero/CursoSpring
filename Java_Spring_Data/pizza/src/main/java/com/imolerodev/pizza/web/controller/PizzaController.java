@@ -19,9 +19,19 @@ public class PizzaController {
         return ResponseEntity.ok(this.pizzaService.getAll());
     }
 
+    @GetMapping("/available")
+    public ResponseEntity<List<PizzaEntity>> getAllAvailable() {
+        return ResponseEntity.ok(this.pizzaService.getAllAvailable());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<PizzaEntity> get(@PathVariable int id) {
         return ResponseEntity.ok(this.pizzaService.get(id));
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<PizzaEntity> getByName(@PathVariable String name) {
+        return ResponseEntity.ok(this.pizzaService.getByName(name));
     }
 
     @PostMapping

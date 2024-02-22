@@ -18,8 +18,16 @@ public class PizzaService {
         return pizzaRepository.findAll();
     }
 
+    public List<PizzaEntity> getAllAvailable() {
+        return pizzaRepository.findAllByAvailableTrueOrderByPrice();
+    }
+
     public PizzaEntity get(int id) {
         return pizzaRepository.findById(id).orElse(null);
+    }
+
+    public PizzaEntity getByName(String name) {
+        return pizzaRepository.findAllByAvailableTrueAndAndNameIgnoreCase(name);
     }
 
     public PizzaEntity save(PizzaEntity pizza) {

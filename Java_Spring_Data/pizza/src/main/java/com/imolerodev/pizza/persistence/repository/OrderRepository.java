@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface OrderRepository extends ListCrudRepository<OrderEntity, Integer> {
     List<OrderEntity> findAllByDateAfter(LocalDateTime fecha);
-
     List<OrderEntity> findAllByMethodIn(List<String> methods);
 }

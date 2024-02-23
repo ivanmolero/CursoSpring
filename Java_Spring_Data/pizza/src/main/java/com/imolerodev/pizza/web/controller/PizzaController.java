@@ -44,6 +44,11 @@ public class PizzaController {
         return ResponseEntity.ok(this.pizzaService.getAllWithoutIngredient(ingredient));
     }
 
+    @GetMapping("/cheapest/{price}")
+    public ResponseEntity<List<PizzaEntity>> getCheapest(@PathVariable Double price) {
+        return ResponseEntity.ok(this.pizzaService.getCheapest(price));
+    }
+
     @PostMapping
     public ResponseEntity<PizzaEntity> get(@RequestBody PizzaEntity pizza) {
         if (pizza.getIdPizza() == null || !pizzaService.exists(pizza.getIdPizza())) {

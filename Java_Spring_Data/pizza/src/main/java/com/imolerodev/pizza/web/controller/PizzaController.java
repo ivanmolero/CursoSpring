@@ -4,6 +4,7 @@ import com.imolerodev.pizza.persistence.entity.PizzaEntity;
 import com.imolerodev.pizza.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +23,12 @@ public class PizzaController {
     }
 
     @GetMapping("/available")
-    public ResponseEntity<List<PizzaEntity>> getAllAvailable() {
-        return ResponseEntity.ok(this.pizzaService.getAllAvailable());
+    public ResponseEntity<Page<PizzaEntity>> getAllAvailable(@RequestParam(defaultValue = "0") int page,
+                                                             @RequestParam(defaultValue = "4") int elements,
+                                                             @RequestParam(defaultValue = "price") String sortBy,
+                                                             @RequestParam(defaultValue = "ASC") String sortDirection) {
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
+        return ResponseEntity.ok(this.pizzaService.getAllAvailable(page, elements, sort));
     }
 
     @GetMapping("/{id}")

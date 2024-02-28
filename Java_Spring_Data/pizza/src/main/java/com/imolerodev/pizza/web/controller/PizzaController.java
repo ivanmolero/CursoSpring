@@ -2,6 +2,7 @@ package com.imolerodev.pizza.web.controller;
 
 import com.imolerodev.pizza.persistence.entity.PizzaEntity;
 import com.imolerodev.pizza.service.PizzaService;
+import com.imolerodev.pizza.service.dto.UpdatePizzaPriceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -76,6 +77,15 @@ public class PizzaController {
     public ResponseEntity<Void> delete(@PathVariable int id) {
         if (this.pizzaService.exists(id)) {
             this.pizzaService.delete(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @PutMapping("/price")
+    public ResponseEntity<Void> updatePrice(@RequestBody UpdatePizzaPriceDto pizzaPriceDto) {
+        if (this.pizzaService.exists(pizzaPriceDto.getPizzaId())) {
+            this.pizzaService.updatePrice(pizzaPriceDto);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();

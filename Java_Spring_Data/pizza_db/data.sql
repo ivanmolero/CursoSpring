@@ -32,14 +32,14 @@ VALUES
 (11,'Rico Mor', 'Beef Chorizo, Sundried Tomatoes, Salsa Verde, Pepper, Jalapeno & pistachios', 23.0, false, false, true),
 (12,'Spinach Artichoke', 'Fresh Spinach, Marinated Artichoke Hearts, Garlic, Fior de Latte, Mozzarella & Parmesan.', 18.95, true, false, true);
 
-INSERT INTO pizza_order (id_order, id_customer, date, total, method, additional_notes)
+INSERT INTO pizza_order (id_customer, date, total, method, additional_notes)
 VALUES
-(1, '192758012', NOW()-INTERVAL '5' DAY, 42.95, 'D', 'Don''t be late pls.'),
-(2, '474771564', NOW()-INTERVAL '4' DAY, 62.0, 'S', null),
-(3, '182120056', NOW()-INTERVAL '3' DAY, 22.0, 'C', null),
-(4, '617684636', NOW()-INTERVAL '2' DAY, 42.0, 'S', null),
-(5, '192758012', NOW()-INTERVAL '1' DAY, 20.5, 'D', 'Please bring the jalapeños separately.'),
-(6, '782668115', NOW(), 23, 'D', null);
+('192758012', NOW()-INTERVAL '5' DAY, 42.95, 'D', 'Don''t be late pls.'),
+('474771564', NOW()-INTERVAL '4' DAY, 62.0, 'S', null),
+('182120056', NOW()-INTERVAL '3' DAY, 22.0, 'C', null),
+('617684636', NOW()-INTERVAL '2' DAY, 42.0, 'S', null),
+('192758012', NOW()-INTERVAL '1' DAY, 20.5, 'D', 'Please bring the jalapeños separately.'),
+('782668115', NOW(), 23, 'D', null);
 
 INSERT INTO order_item (id_order, id_item, id_pizza, quantity, price)
 VALUES

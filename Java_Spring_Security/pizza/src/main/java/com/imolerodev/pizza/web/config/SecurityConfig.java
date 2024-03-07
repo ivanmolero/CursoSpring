@@ -29,9 +29,13 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> {
             auth
                     .requestMatchers(HttpMethod.GET, "/api/pizzas/**")// /api/* solo opera a un nivel, /api/** es multinivel
-                    .permitAll() // se permiten todas las peticiones sin autenticar que coincide con el requestMatchers
+                    .hasAnyRole("ADMIN", "CUSTOMER") // se permiten peticiones get para los dos roles existentes
+                    .requestMatchers(HttpMethod.POST, "/api/pizzas/**")// /api/* solo opera a un nivel, /api/** es multinivel
+                    .hasRole("ADMIN") // se permiten peticiones tipo post para el rol administrador
                     .requestMatchers(HttpMethod.PUT) // aplica a todos los metodos put de la aplicación
-                    .denyAll() //niega todas las peticiones
+                    .hasRole("ADMIN") // solo se atienden si tienen el rol admin
+                    .requestMatchers("/api/orders/**") // aplica a todos los metodos put de la aplicación
+                    .hasRole("ADMIN") // solo se atienden si tienen el rol admin
                     .anyRequest()
                     .authenticated();
         }).httpBasic(Customizer.withDefaults())
@@ -42,12 +46,17 @@ public class SecurityConfig {
 
     @Bean // para que reconozca que se trabajan con usuarios propios
     public UserDetailsService memoryUsers() {
-        UserDetails admin = User.builder() // creación de un usuario
+        UserDetails admin = User.builder() // creación de un usuario admin
                 .username("admin")
                 .password(passwordEncoder().encode("admin"))
                 .roles("ADMIN")
                 .build();
-        return new InMemoryUserDetailsManager(admin);
+        UserDetails customer = User.builder() // creación de un usuario customer
+                .username("customer")
+                .password(passwordEncoder().encode("customer123"))
+                .roles("CUSTOMER")
+                .build();
+        return new InMemoryUserDetailsManager(admin, customer);
     }
 
     @Bean // para facilitar un password encoder

@@ -30,6 +30,8 @@ public class SecurityConfig {
                     .hasRole("ADMIN") // se permiten peticiones tipo post para el rol administrador
                     .requestMatchers(HttpMethod.PUT) // aplica a todos los metodos put de la aplicación
                     .hasRole("ADMIN") // solo se atienden si tienen el rol admin
+                    .requestMatchers("/api/orders/random")
+                    .hasAuthority("random_orders")
                     .requestMatchers("/api/orders/**") // aplica a todos los metodos put de la aplicación
                     .hasRole("ADMIN") // solo se atienden si tienen el rol admin
                     .anyRequest()

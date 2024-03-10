@@ -35,6 +35,7 @@ public class OrderController {
     public ResponseEntity<List<OrderEntity>> getCustomerOrders(@PathVariable("id") String idCustomer) {
         return ResponseEntity.ok(this.orderService.getCustomerOrders(idCustomer));
     }
+
     @GetMapping("/summary/{id}")
     public ResponseEntity<OrderSummary> getSummary(@PathVariable int id) {
         return ResponseEntity.ok(this.orderService.getSummary(id));

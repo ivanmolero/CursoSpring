@@ -4,12 +4,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
     @Bean
@@ -24,6 +26,8 @@ public class SecurityConfig {
 //                .httpBasic();
         http.authorizeHttpRequests(auth -> {
             auth
+                    .requestMatchers("/api/customers/**")
+                    .hasAnyRole("ADMIN", "CUSTOMER")
                     .requestMatchers(HttpMethod.GET, "/api/pizzas/**")// /api/* solo opera a un nivel, /api/** es multinivel
                     .hasAnyRole("ADMIN", "CUSTOMER") // se permiten peticiones get para los dos roles existentes
                     .requestMatchers(HttpMethod.POST, "/api/pizzas/**")// /api/* solo opera a un nivel, /api/** es multinivel

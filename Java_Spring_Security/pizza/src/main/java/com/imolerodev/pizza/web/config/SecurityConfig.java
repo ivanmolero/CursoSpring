@@ -5,12 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -44,23 +40,24 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean // para que reconozca que se trabajan con usuarios propios
-    public UserDetailsService memoryUsers() {
-        UserDetails admin = User.builder() // creación de un usuario admin
-                .username("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
-                .build();
-        UserDetails customer = User.builder() // creación de un usuario customer
-                .username("customer")
-                .password(passwordEncoder().encode("customer123"))
-                .roles("CUSTOMER")
-                .build();
-        return new InMemoryUserDetailsManager(admin, customer);
-    }
-
     @Bean // para facilitar un password encoder
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+//    @Bean // para que reconozca que se trabajan con usuarios propios
+//    public UserDetailsService memoryUsers() {
+//        UserDetails admin = User.builder() // creación de un usuario admin
+//                .username("admin")
+//                .password(passwordEncoder().encode("admin"))
+//                .roles("ADMIN")
+//                .build();
+//        UserDetails customer = User.builder() // creación de un usuario customer
+//                .username("customer")
+//                .password(passwordEncoder().encode("customer123"))
+//                .roles("CUSTOMER")
+//                .build();
+//        return new InMemoryUserDetailsManager(admin, customer);
+//    }
+
+
 }

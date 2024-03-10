@@ -54,3 +54,16 @@ VALUES
 (5, 2, 12, 0.5, 9.5),
 (6, 1, 11, 1, 23);
 
+INSERT INTO users(username, disabled, email, locked, password)
+VALUES
+('admin', false, 'admin@abc.com', false, '$2y$10$N0Ja6VH3eleQy6vI9i/gw.SVSrFahBpYnYmt/zK30wSqmi30Qh4XW'),
+('customer', false, 'customer@abc.com', false, '$2y$10$cnrogv23vBbZ9xA1lq0GFO6deKEPxZ8iPROYgF4ipU.WdcYEWGLjO');
+
+
+INSERT INTO user_role(username, role, granted_date)
+VALUES
+('admin', 'ADMIN', NOW()),
+('customer', 'CUSTOMER', NOW());
+
+
+

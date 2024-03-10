@@ -3,7 +3,9 @@ package com.imolerodev.pizza.web.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,6 +28,7 @@ public class SecurityConfig {
 //                .httpBasic();
         http.authorizeHttpRequests(auth -> {
             auth
+                    .requestMatchers("/api/auth/**").permitAll()
                     .requestMatchers("/api/customers/**")
                     .hasAnyRole("ADMIN", "CUSTOMER")
                     .requestMatchers(HttpMethod.GET, "/api/pizzas/**")// /api/* solo opera a un nivel, /api/** es multinivel
@@ -44,6 +47,11 @@ public class SecurityConfig {
                 .csrf(csrfConfigurer -> csrfConfigurer.disable())
                 .cors(Customizer.withDefaults());
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
     }
 
     @Bean // para facilitar un password encoder

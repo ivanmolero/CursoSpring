@@ -11,8 +11,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "pizza")
-@EntityListeners({AuditingEntityListener.class,
-AuditPizzaListener.class})
+@EntityListeners({AuditingEntityListener.class, AuditPizzaListener.class})
 @Getter
 @Setter
 public class PizzaEntity extends AuditableEntity implements Serializable {
